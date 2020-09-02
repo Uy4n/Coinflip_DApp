@@ -34,10 +34,11 @@ function tailsInput(){
 // @ comment 119/333 and working upwards from there
 function withdrawFundsOutput(balanceToTransfer){
   var balanceToTransfer = $("#withdraw_funds_output").val();
-  config = {
+  balanceToTransfer = web3.utils.toWei(balanceToTransfer, "ether");
+  /*config = {
     value: web3.utils.toWei(balanceToTransfer, "ether"),
     //from: accounts[0]
-  }
+  }*/
 
   //contractInstance.methods.withdrawFunds(web3.utils.toWei(balanceToTransfer, "ether")).send(config)
   // See https://stackoverflow.com/questions/59855799/how-to-resolve-this-error-in-solidity-the-constructor-should-be-payable-if-you
@@ -46,7 +47,7 @@ function withdrawFundsOutput(balanceToTransfer){
     var etherAmount = web3.utils.fromWei(res, "ether");
           alert("Fund have been withdrawn: " + etherAmount);
     });*/
-   balanceToTransfer = web3.utils.toWei(balanceToTransfer, "ether");
+
   contractInstance.methods.withdrawFunds(balanceToTransfer).send()
   .on("transactionHash", function(hash){
     console.log(hash);

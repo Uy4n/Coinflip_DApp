@@ -46,7 +46,8 @@ function withdrawFundsOutput(balanceToTransfer){
     var etherAmount = web3.utils.fromWei(res, "ether");
           alert("Fund have been withdrawn: " + etherAmount);
     });*/
-  contractInstance.methods.withdrawFunds(balanceToTransfer).send(config)
+   balanceToTransfer = web3.utils.toWei(balanceToTransfer, "ether");
+  contractInstance.methods.withdrawFunds(balanceToTransfer).send()
   .on("transactionHash", function(hash){
     console.log(hash);
   })
